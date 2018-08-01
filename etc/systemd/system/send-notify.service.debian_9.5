@@ -1,0 +1,15 @@
+[Unit]
+Description="wakeup and shutdown shell by iganari"
+After=systemd-networkd.service
+Before=shutdown.target
+Requires=systemd-networkd.service
+
+[Service]
+Type=oneshot
+# RemainAfterExit=yes
+RemainAfterExit=true
+ExecStart=/bin/bash /usr/local/iganari/notify-server/bin/send-notify.sh wakeup
+ExecStop=/bin/bash  /usr/local/iganari/notify-server/bin/send-notify.sh sleep
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,106 @@
+$script = <<SCRIPT
+  cd /develop/notify-server/
+  uname -n
+  # /bin/bash provision.sh
+  cd /develop/notify-server/opsfiles/vagrant
+  /bin/bash server-init.sh 
+SCRIPT
+
+Vagrant.configure(2) do |config|
+  # config.vbguest.auto_update = false
+
+  if Vagrant.has_plugin?("vagrant-cachier")
+    config.cache.scope = :box
+  end
+
+  vhosts = [
+    {
+      "config_name" => "centos-6.10",
+      "instance_name" => "centos-6.10",
+      "ip" => "192.168.33.101",
+      "vbox" => "bento/centos-6.10",
+      "cpu" => 1,
+      "memory" => 512,
+      "inventory" => "centos-6.10"
+    },
+    {
+      "config_name" => "centos-7.5",
+      "instance_name" => "centos-7.5",
+      "ip" => "192.168.33.102",
+      "vbox" => "bento/centos-7.5",
+      "cpu" => 1,
+      "memory" => 512,
+      "inventory" => "centos-7.5"
+    },
+    ### {
+    ###   "config_name" => "ubuntu-16.04",
+    ###   "instance_name" => "ubuntu-16.04",
+    ###   "ip" => "192.168.33.111",
+    ###   "vbox" => "bento/ubuntu-16.04",
+    ###   "cpu" => 1,
+    ###   "memory" => 512,
+    ###   "inventory" => "ubuntu-16.04"
+    ### },
+    {
+      "config_name" => "ubuntu-18.04",
+      "instance_name" => "ubuntu-18.04",
+      "ip" => "192.168.33.112",
+      "vbox" => "bento/ubuntu-18.04",
+      "cpu" => 1,
+      "memory" => 512,
+      "inventory" => "ubuntu-18.04"
+    },
+    {
+      "config_name" => "debian-8.11",
+      "instance_name" => "debian-8.11",
+      "ip" => "192.168.33.121",
+      "vbox" => "bento/debian-8.11",
+      "cpu" => 1,
+      "memory" => 512,
+      "inventory" => "debian-8.11"
+    },
+    {
+      "config_name" => "debian-9.5",
+      "instance_name" => "debian-9.5",
+      "ip" => "192.168.33.122",
+      "vbox" => "bento/debian-9.5",
+      "cpu" => 1,
+      "memory" => 512,
+      "inventory" => "debian-9.5"
+    },
+  ]
+
+  vhosts.each do |vhost|
+    config.vm.define vhost["config_name"] do |server|
+      ### determined specific IP.
+      server.vm.network "private_network", ip: vhost["ip"]
+      ### hostname of server
+      server.vm.hostname = vhost["instance_name"]
+      ### box setting
+      server.vm.box = vhost["vbox"]
+      ### vm setting
+      server.vm.provider "virtualbox" do |vb|
+        ### name of virtualbox
+        vb.name = vhost["instance_name"]
+        ### spec define
+        vb.cpus = vhost["cpu"]
+        vb.memory = vhost["memory"]
+        vb.customize ['modifyvm', :id,"--natdnshostresolver1", "on"]
+        vb.customize ['modifyvm', :id,"--natdnsproxy1", "on"]
+      end
+  
+      ### settitng of synced_folder
+      server.vm.synced_folder "../../", "/develop/notify-server", \
+        :create => true, \
+        :owner  => 'vagrant', \
+        :group  => 'vagrant', \
+        :mount_options => ['dmode=755,fmode=755']
+  
+      server.vm.provision "shell" do |shell|
+        shell.inline = $script
+        shell.args   = vhost["inventory"]
+      end
+    end
+  end
+end
+
