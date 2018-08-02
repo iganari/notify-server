@@ -68,6 +68,9 @@ cp notify-me.sh.sample notify-me.sh
 sed -i -e "s/SLACK_WEBHOOK/$slack_webhook/g" notify-me.sh
 sed -i -e "s/SLACK_CHANNEL/$slack_channel/g" notify-me.sh
 ```
+```
+cd ..
+```
 
 
 +  初期配置スクリプト実行  
