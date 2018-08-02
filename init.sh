@@ -24,6 +24,9 @@ check_os()
     if [ "$(cat ${chk_debian})" = '8.11' ];then
       echo 'debian 8.11'
       def_os='debian_8.11'
+    elif [ "$(cat ${chk_debian})" = '9.3' ];then
+      echo 'debian 9.3'
+      def_os='debian_9.5'
     elif [ "$(cat ${chk_debian})" = '9.5' ];then
       echo 'debian 9.5'
       def_os='debian_9.5'
@@ -33,10 +36,12 @@ check_os()
           echo "Ubuntu 18.04"
           def_os='ubuntu_18.04'
         else
-          :
+          echo "no idea"
+          exit 1
         fi
       else
         echo 'unkwon'
+        exit 1
       fi
     fi
   elif [ -f "${chk_centos}" ];then
@@ -49,12 +54,15 @@ check_os()
         def_os='centos_7.5'
       else
         echo "no version"
+        exit 1
       fi
     else
       echo "not CentOS"
+      exit 1
     fi
   else
-    echo "no"
+    echo "no idea"
+    exit 1
   fi
 }
 
