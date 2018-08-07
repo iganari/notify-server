@@ -60,9 +60,18 @@ Vagrant.configure(2) do |config|
       "inventory" => "debian-8.11"
     },
     {
+      "config_name" => "debian-9.3",
+      "instance_name" => "debian-9.3",
+      "ip" => "192.168.33.122",
+      "vbox" => "bento/debian-9.3",
+      "cpu" => 1,
+      "memory" => 512,
+      "inventory" => "debian-9.3"
+    },
+    {
       "config_name" => "debian-9.5",
       "instance_name" => "debian-9.5",
-      "ip" => "192.168.33.122",
+      "ip" => "192.168.33.123",
       "vbox" => "bento/debian-9.5",
       "cpu" => 1,
       "memory" => 512,
