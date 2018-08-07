@@ -8,6 +8,8 @@ log_dir='/tmp'
 # localIP=`for i in `ip addr show | grep BROADCAST | grep -v docker | grep 'BROADCAST,MULTICAST,UP,LOWER_UP' | awk -F \: '{print $2}'` ; do ip addr show $i ; done`
 work_dir='/usr/local/iganari'
 
+sleep 30
+
 local_ip_chk()
 {
   for i in `ip addr show | grep BROADCAST | grep -v docker | grep 'BROADCAST,MULTICAST,UP,LOWER_UP' | awk -F \: '{print $2}'`
