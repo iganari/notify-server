@@ -2,7 +2,6 @@
 
 set -x
 
-work_dir='/usr/local/iganari'
 my_dir="$(cd $(dirname $0); pwd)"
 # my_dir="$ pwd)"
 
@@ -12,6 +11,15 @@ my_dir="$(cd $(dirname $0); pwd)"
 #     sudo cp -a ./etc/rc.d/rc.local /etc/rc.d/rc.local &&\
 #     sudo chmod 755 /etc/rc.d/rc.local
 # }
+
+check_user()
+{
+    user_name='notify-server'
+    work_dir="/usr/local/${user_name}"
+    useradd -m -s /bin/bash ${user_name}
+    mkdir ${work_dir} && \
+    chmod 0777 -R ${work_dir}
+}
 
 check_os()
 {
@@ -87,11 +95,15 @@ setting_systemctl()
   fi
 }
 
+
+### Main
+check_user
+
 if [ "${my_dir}" = "${work_dir}/notify-server" ]; then
-  echo "1"
+  # echo "1"
   check_os
   # setting_rclocal
-  setting_systemctl
+  # setting_systemctl
   exit 0
 else
   echo "設置ディレクトリが違反です。"
