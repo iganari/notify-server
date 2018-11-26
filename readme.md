@@ -39,16 +39,19 @@
 
 + サーバログイン
 + `sudo` が使えるユーザになる
-   + 今回は `iganari` にて行なう
+   + 今回は `notify-server` を作成して、使用する
 
 ```
-sudo su - iganari
+useradd -m -s /bin/bash notify-server
+```
+```
+sudo su - notify-server
 ```
 
 + スクリプトを置くPATHに移動( `/usr/local/iganari` を想定)
 
 ```
-cd /usr/local/iganari
+cd /usr/local/notify-server
 ```
 + repositoryをcloneする
 
