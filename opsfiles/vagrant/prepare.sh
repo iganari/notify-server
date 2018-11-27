@@ -2,18 +2,17 @@
 
 # set -x
 
-# vb_name='pkg-ansible'
-
-echo $1
-
 if [ "$1" = "" ];then
-  echo 'no arg. Plz "sh prepare.sh chk"'
+  echo 'No arg... Plz "sh prepare.sh chk"'
   
 elif [ "$1" = "chk" ];then 
-  echo "vagrant server is "
-  for i in `cat Vagrantfile | grep config_name | grep -v server | grep -v ubuntu-16.04 | awk -F\" '{print $4}'`
+  echo "Your argument is $1 "
+  for i in `cat Vagrantfile | grep config_name | grep -v server | grep -v dummy-vm | awk -F\" '{print $4}'`
     do
-      echo "$i"
+      echo "The VM that you can start-up is $i"
+      echo "Please execute this command"
+      echo ""
+      echo "vagrant up $i"
     done
   exit 0
 else
@@ -31,7 +30,10 @@ else
   exit 0
 fi
 
-
+# set -x
+# 
+# vb_name='pkg-ansible'
+# 
 # vagrant destroy -f
 # vagrant up ${vb_name}
 # echo "vagrant ssh ${vb_name}"
