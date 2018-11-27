@@ -37,16 +37,9 @@
 
 ### 2. サーバにてスクリプトを配置する
 
-+ サーバログイン
 + `sudo` が使えるユーザになる
-   + 今回は `notify-server` を作成して、使用する
-
-```
-useradd -m -s /bin/bash notify-server
-```
-```
-sudo su - notify-server
-```
++ 以下のスクリプトを実行する
+    + 今回は `notify-server` を作成して、使用する
 
 + スクリプトを置くPATHに移動( `/usr/local/iganari` を想定)
 
