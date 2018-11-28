@@ -41,7 +41,7 @@
 + 以下のスクリプトを実行する
     + 今回は `notify-server` を作成して、使用する
 
-+ スクリプトを置くPATHに移動( `/usr/local/iganari` を想定)
++ スクリプトを置くPATHに移動( `/usr/local/notify-server` を想定)
 
 ```
 cd /usr/local/notify-server
