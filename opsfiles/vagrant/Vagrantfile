@@ -1,9 +1,6 @@
 $script = <<SCRIPT
   cd /develop/notify-server/
-  uname -n
-  # /bin/bash provision.sh
-  # cd /develop/notify-server/opsfiles/vagrant
-  # /bin/bash server-init.sh 
+  ls 
 SCRIPT
 
 Vagrant.configure(2) do |config|
