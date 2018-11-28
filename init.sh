@@ -2,7 +2,9 @@
 
 set -x
 
+### Get current directory
 my_dir="$(cd $(dirname $0); pwd)"
+
 # my_dir="$ pwd)"
 
 # setting_rclocal()
@@ -12,13 +14,15 @@ my_dir="$(cd $(dirname $0); pwd)"
 #     sudo chmod 755 /etc/rc.d/rc.local
 # }
 
-check_user()
+check_dir()
 {
-    user_name='notify-server'
-    work_dir="/usr/local/${user_name}"
-    useradd -m -s /bin/bash ${user_name}
-    mkdir ${work_dir} && \
-    chmod 0777 -R ${work_dir}
+    repo_name='notify-server'
+    work_dir='/usr/local/bin'
+    # useradd -m -s /bin/bash ${user_name}
+    # mkdir ${work_dir} && \
+    # chmod 0777 -R ${work_dir}/${user_name}
+    repo_dir="${work_dir}/${repo_name}"
+    cd ${repo_dir}
 }
 
 check_os()
@@ -74,9 +78,9 @@ check_os()
   fi
 }
 
-setting_systemctl()
+setting_script()
 {
-  repo_dir="${work_dir}/notify-server"
+  # repo_dir="${work_dir}/${repo_name}"
   if [ "${def_os}" = "centos_6.10" ];then
     echo "CentOS 6.10"
     sudo cp -a ${repo_dir}/etc/init.d/send-notify /etc/init.d/send-notify
@@ -97,13 +101,13 @@ setting_systemctl()
 
 
 ### Main
-check_user
+check_dir
 
-if [ "${my_dir}" = "${work_dir}/notify-server" ]; then
+if [ "${my_dir}" = "${repo_dir}" ]; then
   # echo "1"
+  # chkeck_user
   check_os
-  # setting_rclocal
-  # setting_systemctl
+  setting_script
   exit 0
 else
   echo "設置ディレクトリが違反です。"
