@@ -37,21 +37,14 @@
 
 ### 2. サーバにてスクリプトを配置する
 
-+ サーバログイン
 + `sudo` が使えるユーザになる
-   + 今回は `notify-server` を作成して、使用する
++ 以下のスクリプトを実行する
+    + 今回は `notify-server` を作成して、使用する
+
++ スクリプトを置くPATHに移動( `/usr/local/bin` の配下に置きます)
 
 ```
-useradd -m -s /bin/bash notify-server
-```
-```
-sudo su - notify-server
-```
-
-+ スクリプトを置くPATHに移動( `/usr/local/iganari` を想定)
-
-```
-cd /usr/local/notify-server
+cd /usr/local/bin
 ```
 + repositoryをcloneする
 
@@ -74,7 +67,6 @@ sed -i -e "s/SLACK_CHANNEL/$slack_channel/g" notify-me.sh
 ```
 cd ..
 ```
-
 
 +  初期配置スクリプト実行  
 
