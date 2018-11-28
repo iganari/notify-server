@@ -61,12 +61,6 @@ export slack_channel='ntf-me'
 cd bin
 sudo cp notify-me.sh.sample notify-me.sh
 ```
-
-
-```
-$ sed --version
-sed (GNU sed) 4.2.2
-```
 ```
 sudo sed -i -e "s|SLACK_WEBHOOK|${slack_webhook}|g" notify-me.sh
 sudo sed -i -e "s|SLACK_CHANNEL|${slack_channel}|g" notify-me.sh
