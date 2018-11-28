@@ -68,7 +68,6 @@ sed -i -e "s/SLACK_CHANNEL/$slack_channel/g" notify-me.sh
 cd ..
 ```
 
-
 +  初期配置スクリプト実行  
 
 ```
