@@ -53,7 +53,7 @@ check_os()
           exit 1
         fi
       elif [ "${chk_raspbin}" = "" ]; then
-        if ["$(cat ${chk_raspbian} | grep PRETTY_NAME | awk -F\" '{print $2}' | awk -F\  '{print $NF}')" =  "buster/sid" ]; then
+        if [ "$(cat ${chk_raspbian} | grep PRETTY_NAME | awk -F\" '{print $2}' | awk -F\  '{print $NF}' | awk -F\/ '{print $1}')" =  "buster" ]; then  
           echo "Raspbian buster"
           def_os='raspbian_buster'
         else
