@@ -30,6 +30,7 @@ check_os()
   chk_debian='/etc/debian_version'
   chk_centos='/etc/redhat-release'
   chk_ubuntu='/etc/lsb-release'
+  chk_raspbian='/usr/lib/os-release'
   def_os=''
   
   if [ -f "${chk_debian}" ];then
@@ -37,16 +38,24 @@ check_os()
       echo 'debian 8.11'
       def_os='debian_8.11'
     elif [ "$(cat ${chk_debian})" = '9.3' ];then
-      echo 'debian 9.3'
+      echo 'debian 9.3 stretch'
       def_os='debian_9.5'
     elif [ "$(cat ${chk_debian})" = '9.5' ];then
-      echo 'debian 9.5'
+      echo 'debian 9.5 stretch'
       def_os='debian_9.5'
     else
       if [ -f "${chk_ubuntu}" ] && [ "$(cat ${chk_ubuntu} | grep DISTRIB_ID | awk -F\= '{print $2}')" = "Ubuntu" ];then
         if [ "$(cat ${chk_ubuntu} | grep DISTRIB_RELEASE | awk -F\= '{print $2}')" = "18.04" ];then
           echo "Ubuntu 18.04"
           def_os='ubuntu_18.04'
+        else
+          echo "no idea"
+          exit 1
+        fi
+      elif [ "${chk_raspbin}" = "" ]; then
+        if [ "$(cat ${chk_raspbian} | grep PRETTY_NAME | awk -F\" '{print $2}' | awk -F\  '{print $NF}' | awk -F\/ '{print $1}')" =  "buster" ]; then  
+          echo "Raspbian buster"
+          def_os='raspbian_buster'
         else
           echo "no idea"
           exit 1
