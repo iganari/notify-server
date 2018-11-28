@@ -37,23 +37,19 @@
 
 ### 2. サーバにてスクリプトを配置する
 
-+ サーバログイン
 + `sudo` が使えるユーザになる
-   + 今回は `iganari` にて行なう
++ 以下のスクリプトを実行する
+    + 今回は `notify-server` を作成して、使用する
+
++ スクリプトを置くPATHに移動( `/usr/local/bin` の配下に置きます)
 
 ```
-sudo su - iganari
-```
-
-+ スクリプトを置くPATHに移動( `/usr/local/iganari` を想定)
-
-```
-cd /usr/local/iganari
+cd /usr/local/bin
 ```
 + repositoryをcloneする
 
 ```
-git clone https://github.com/iganari/notify-server.git && cd notify-server
+sudo git clone https://github.com/iganari/notify-server.git && cd notify-server
 ```
 
 + 通知するslackのチャンネル名とWebhookのURLを入れて、スクリプトを完成させる
@@ -63,20 +59,24 @@ export slack_webhook='https://hooks.slack.com/services/hogehoge/testtest/fizzbuz
 export slack_channel='ntf-me'
 
 cd bin
-cp notify-me.sh.sample notify-me.sh
-
-sed -i -e "s/SLACK_WEBHOOK/$slack_webhook/g" notify-me.sh
-sed -i -e "s/SLACK_CHANNEL/$slack_channel/g" notify-me.sh
+sudo cp notify-me.sh.sample notify-me.sh
+```
+```
+sudo sed -i -e "s|SLACK_WEBHOOK|${slack_webhook}|g" notify-me.sh
+sudo sed -i -e "s|SLACK_CHANNEL|${slack_channel}|g" notify-me.sh
+```
+```
+sudo chmod 0755 notify-me.sh
+sudo chmod 0755 send-notify.sh
 ```
 ```
 cd ..
 ```
 
-
 +  初期配置スクリプト実行  
 
 ```
-sh init.sh
+sudo sh init.sh
 ```
 
 ## サービス確認方法
