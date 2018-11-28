@@ -5,10 +5,10 @@
 
 case "$1" in
   start)
-        /usr/local/iganari/notify-server/bin/send-notify.sh wakeup
+        /usr/local/bin/notify-server/bin/send-notify.sh wakeup
         ;;
   stop)
-        /usr/local/iganari/notify-server/bin/send-notify.sh sleep
+        /usr/local/bin/notify-server/bin/send-notify.sh sleep
         ;;
   *)
         echo $"Usage: send-notify {start|stop}"
