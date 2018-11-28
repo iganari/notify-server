@@ -66,6 +66,10 @@ sudo sed -i -e "s|SLACK_WEBHOOK|${slack_webhook}|g" notify-me.sh
 sudo sed -i -e "s|SLACK_CHANNEL|${slack_channel}|g" notify-me.sh
 ```
 ```
+sudo chmod 0755 notify-me.sh
+sudo chmod 0755 send-notify.sh
+```
+```
 cd ..
 ```
 
