@@ -92,14 +92,14 @@ setting_script()
   # repo_dir="${work_dir}/${repo_name}"
   if [ "${def_os}" = "centos_6.10" ];then
     echo "CentOS 6.10"
-    sudo cp -a ${repo_dir}/etc/init.d/send-notify /etc/init.d/send-notify
+    sudo ln -s ${repo_dir}/etc/init.d/send-notify /etc/init.d/send-notify
     sudo chmod 0755 /etc/init.d/send-notify
     sudo chkconfig --add send-notify
     sudo service send-notify start
     sleep 10
     # sudo service send-notify status
   else
-    sudo cp -a ${repo_dir}/etc/systemd/system/send-notify.service.${def_os} ${repo_dir}/etc/systemd/system/send-notify.service
+    sudo ln -s ${repo_dir}/etc/systemd/system/send-notify.service.${def_os} ${repo_dir}/etc/systemd/system/send-notify.service
     sudo chmod 0755 ${repo_dir}/etc/systemd/system/send-notify.service
     sudo systemctl enable ${repo_dir}/etc/systemd/system/send-notify.service
     sudo systemctl start send-notify
