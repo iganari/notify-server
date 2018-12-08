@@ -38,8 +38,17 @@
 ### 2. サーバにてスクリプトを配置する
 
 + `sudo` が使えるユーザになる
-+ 以下のスクリプトを実行する
-    + 今回は `notify-server` を作成して、使用する
++ 以下のスクリプトをSUDO権限を持っているユーザにて行う
+    + `notify-server` というユーザを作成する例
+
+    ```
+    $ sudo su -
+    #
+    # export _USER_NAME='notify-server'
+    # useradd -m -s /bin/bash ${_USER_NAME}
+    # echo "${_USER_NAME}    ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/${_USER_NAME}
+    # chmod 0440 /etc/sudoers.d/${_USER_NAME}
+    ```
 
 + スクリプトを置くPATHに移動( `/usr/local/bin` の配下に置きます)
 
