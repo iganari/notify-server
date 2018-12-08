@@ -2,7 +2,7 @@
 Description="wakeup and shutdown shell by iganari"
 After=ssh.service
 Before=shutdown.target
-Requires=systemd-networkd.service
+Requires=networking.service
 
 [Service]
 Type=oneshot
