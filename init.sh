@@ -56,7 +56,7 @@ check_os()
         if [ "$(cat ${chk_raspbian} | grep PRETTY_NAME | awk -F\" '{print $2}' | awk -F\  '{print $NF}' | awk -F\/ '{print $1}')" =  "buster" ]; then  
           echo "Raspbian buster"
           def_os='raspbian_buster'
-        elif [ "$(cat ${chk_raspbian} | grep PRETTY_NAME | awk -F\" '{print $2}' | awk -F\  '{print $3}'" =  "9" ]; then  
+        elif [ "$(cat ${chk_raspbian} | grep PRETTY_NAME | awk -F\" '{print $2}' | awk -F\  '{print $3}')" =  "9" ]; then  
           echo "Raspbian GNU/Linux 9 (stretch)"
           def_os='raspbian_stretch'
         else
