@@ -74,8 +74,8 @@ export slack_channel='ntf-me'
 ```
 cd bin
 cp notify-me.sh.sample notify-me.sh
-sudo sed -i -e "s|SLACK_WEBHOOK|${slack_webhook}|g" notify-me.sh
-sudo sed -i -e "s|SLACK_CHANNEL|${slack_channel}|g" notify-me.sh
+sed -i -e "s|SLACK_WEBHOOK|${slack_webhook}|g" notify-me.sh
+sed -i -e "s|SLACK_CHANNEL|${slack_channel}|g" notify-me.sh
 ```
 ```
 chmod 0755 notify-me.sh
@@ -88,7 +88,7 @@ cd ..
 +  初期配置スクリプト実行  
 
 ```
-sudo sh init.sh
+sh init.sh
 ```
 
 ## サービス確認方法
