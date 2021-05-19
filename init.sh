@@ -111,7 +111,6 @@ setting_script()
     systemctl start send-notify
     sleep 10
     systemctl status send-notify
-  fi
   else
     ln -s ${repo_dir}/etc/systemd/system/send-notify.service.${def_os} ${repo_dir}/etc/systemd/system/send-notify.service
     chmod 0755 ${repo_dir}/etc/systemd/system/send-notify.service
