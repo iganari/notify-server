@@ -2,7 +2,7 @@
 
 ## 概要
 
-+ systemd(およびinit.d)を利用して、サーバが(再)起動した際に Slack に IP アドレスを通知させる
++ systemd(およびinit.d)を利用して、サーバが(再)起動した際に Slack に IP アドレスを通知させます
 
 ## 種類
 
@@ -22,14 +22,11 @@
 
 + Incoming WebHooks
     + https://slack.com/apps/A0F7XDUAZ
-    + 上記から、受け取るslack上のチャンネルとWebHookを設定する
-
+    + 上記から、受け取るslack上のチャンネルと WebHook を設定します
 
 ![](./images/01-incoming-webhooks.png)
 
-
-+ e.g. slackのチャンネル名 `ntf-me` で作ってみると以下のよう
-
++ e.g. slackのチャンネル名 `ntf-me` で作ってみると以下のようになります
 
 ![](./images/02-create-channel.png)
 ![](./images/03-create-webhook.png)
@@ -37,39 +34,35 @@
 
 ### 2. サーバにてスクリプトを配置する
 
-+ `sudo` が使えるユーザになる
-+ 以下のスクリプトをSUDO権限を持っているユーザにて行う
-    + `notify-server` というユーザを作成する例
++ `ROOT` になります
 
-    ```
-    $ sudo su -
-    #
-    # export _USER_NAME='notify-server'
-    # useradd -m -s /bin/bash ${_USER_NAME}
-    # echo "${_USER_NAME}    ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/${_USER_NAME}
-    # chmod 0440 /etc/sudoers.d/${_USER_NAME}
-    ```
+```
+$ sudo su -
+```
 
 + スクリプトを置くPATHに移動( `/usr/local/bin` の配下に置きます)
 
 ```
 cd /usr/local/bin
 ```
-+ repositoryをcloneする
++ Repository をサーバ内に Cloneする
 
 ```
-export _SUDO_USER='notify-server'
-
-sudo git clone https://github.com/iganari/notify-server.git && \
-sudo chown ${_SUDO_USER}:${_SUDO_USER} -R notify-server && \
+git clone https://github.com/iganari/notify-server.git && \
 cd notify-server
 ```
 
-+ 通知するslackのチャンネル名とWebhookのURLを入れて、スクリプトを完成させる
++ 通知するslackのチャンネル名と Webhook の URL を入れて、スクリプトを完成させる
 
 ```
 export slack_webhook='https://hooks.slack.com/services/hogehoge/testtest/fizzbuzz'
 export slack_channel='ntf-me'
+
+
+export slack_webhook='https://hooks.slack.com/services/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'
+
+
+
 ```
 ```
 cd bin
@@ -82,10 +75,11 @@ chmod 0755 notify-me.sh
 chmod 0755 send-notify.sh
 ```
 ```
-cd ..
+cd -
 ```
 
-+  初期配置スクリプト実行  
++  初期配置スクリプト実行
+  + OS を判断して、スクリプトを配置するスクリプト
 
 ```
 sh init.sh
@@ -143,3 +137,7 @@ sudo chkconfig --list | grep send-notify
 + こんな感じでクラウディアさんが教えてくれます
 
 ![](./images/05-result-slack.png)
+
+## おまけ
+
+ローカルに Vagrant をインストールしている場合は、 [opsfiles/vagrant](opsfiles/vagrant/README.md) を使うことが出来ます
