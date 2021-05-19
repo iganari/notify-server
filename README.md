@@ -60,16 +60,18 @@ export slack_channel='ntf-me'
 
 
 export slack_webhook='https://hooks.slack.com/services/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'
-
-
-
 ```
+
+
 ```
 cd bin
 cp notify-me.sh.sample notify-me.sh
 sed -i -e "s|SLACK_WEBHOOK|${slack_webhook}|g" notify-me.sh
 sed -i -e "s|SLACK_CHANNEL|${slack_channel}|g" notify-me.sh
 ```
+
++ パーミッションの変更
+
 ```
 chmod 0755 notify-me.sh
 chmod 0755 send-notify.sh
