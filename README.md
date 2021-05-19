@@ -57,9 +57,6 @@ cd notify-server
 ```
 export slack_webhook='https://hooks.slack.com/services/hogehoge/testtest/fizzbuzz'
 export slack_channel='ntf-me'
-
-
-export slack_webhook='https://hooks.slack.com/services/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'
 ```
 
 
