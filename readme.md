@@ -58,7 +58,11 @@ cd /usr/local/bin
 + repositoryをcloneする
 
 ```
-sudo git clone https://github.com/iganari/notify-server.git && cd notify-server
+export _SUDO_USER='notify-server'
+
+sudo git clone https://github.com/iganari/notify-server.git && \
+sudo chown ${_SUDO_USER}:${_SUDO_USER} -R notify-server && \
+cd notify-server
 ```
 
 + 通知するslackのチャンネル名とWebhookのURLを入れて、スクリプトを完成させる
@@ -66,17 +70,16 @@ sudo git clone https://github.com/iganari/notify-server.git && cd notify-server
 ```
 export slack_webhook='https://hooks.slack.com/services/hogehoge/testtest/fizzbuzz'
 export slack_channel='ntf-me'
-
+```
+```
 cd bin
-sudo cp notify-me.sh.sample notify-me.sh
+cp notify-me.sh.sample notify-me.sh
+sed -i -e "s|SLACK_WEBHOOK|${slack_webhook}|g" notify-me.sh
+sed -i -e "s|SLACK_CHANNEL|${slack_channel}|g" notify-me.sh
 ```
 ```
-sudo sed -i -e "s|SLACK_WEBHOOK|${slack_webhook}|g" notify-me.sh
-sudo sed -i -e "s|SLACK_CHANNEL|${slack_channel}|g" notify-me.sh
-```
-```
-sudo chmod 0755 notify-me.sh
-sudo chmod 0755 send-notify.sh
+chmod 0755 notify-me.sh
+chmod 0755 send-notify.sh
 ```
 ```
 cd ..
@@ -85,7 +88,7 @@ cd ..
 +  初期配置スクリプト実行  
 
 ```
-sudo sh init.sh
+sh init.sh
 ```
 
 ## サービス確認方法
