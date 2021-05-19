@@ -1,8 +1,8 @@
-# notify-server
+# Notify Server
 
-## 目的
+## 概要
 
-+ systemd(およびinit.d)を利用して、サーバが起動した際にslackにIPを通知させる
++ systemd(およびinit.d)を利用して、サーバが(再)起動した際に Slack に IP アドレスを通知させる
 
 ## 種類
 
@@ -12,7 +12,7 @@
     + Ubuntu 18.04
     + Debian 8.11
     + Debian 9.5
-+ `init.d` を使うOS
++ `init.d` を使う OS
     + CentOS 6.10
 
 ## 設置方法
